@@ -105,7 +105,6 @@ function isInViewport(element) {
 window.addEventListener('scroll', animateSkills);
 animateSkills();
 
-// Contact Form Success Handling (Formspree)
 // Contact Form Handling with Custom Popup + Auto Hide + Spinner
 const contactForm = document.getElementById('contact-form');
 const formMessage = document.getElementById('form-message');
@@ -163,6 +162,17 @@ function showFormMessage(message, type) {
     }, 5000);
 }
 
+// Smooth hover effects for contact links
+const contactLinks = document.querySelectorAll('.contact-links a');
+contactLinks.forEach(link => {
+    link.addEventListener('mouseenter', (e) => {
+        e.target.style.transform = 'translateY(-2px)';
+    });
+    
+    link.addEventListener('mouseleave', (e) => {
+        e.target.style.transform = 'translateY(0)';
+    });
+});
 
 // Virtual Mentor Hub
 const mentorForm = document.getElementById('mentor-form');
@@ -269,5 +279,29 @@ if (themeToggle) {
         document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
         themeIcon.className = document.body.dataset.theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
         console.log('Theme switched to:', document.body.dataset.theme);
+    });
+}
+
+const customCursor = document.getElementById('custom-cursor');
+
+if (customCursor) {
+    document.addEventListener('mousemove', (e) => {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+    });
+
+    // Add hover effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            customCursor.style.background = 'var(--accent-color)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            customCursor.style.background = 'transparent';
+        });
     });
 }
